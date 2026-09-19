@@ -97,9 +97,18 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center justify-between mt-2.5 pt-2.5 border-t border-cyan-500/15 text-[10px] sm:text-[11px] text-cyan-300/70">
           <div className="flex items-center gap-1.5 truncate">
             {syncError ? (
-              <span className="text-rose-400 flex items-center gap-1">
+              <button 
+                onClick={onRefresh}
+                className="text-amber-400 hover:text-amber-300 flex items-center gap-1 cursor-pointer transition"
+                title="Tap to retry connection"
+              >
                 <AlertCircle className="w-3 h-3" />
-                <span>Reconnecting...</span>
+                <span className="underline decoration-dotted">{t.reconnecting}</span>
+              </button>
+            ) : isRefreshing ? (
+              <span className="text-cyan-400 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+                <span>{t.syncing}</span>
               </span>
             ) : (
               <span className="text-emerald-400 flex items-center gap-1">

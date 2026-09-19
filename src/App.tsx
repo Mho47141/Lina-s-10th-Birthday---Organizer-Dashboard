@@ -6,7 +6,7 @@ import {
   Language, 
   ActivePage 
 } from './types';
-import { fetchLiveSheetData } from './services/api';
+import { fetchLiveSheetData, getFromLocalCache } from './services/api';
 import { Header } from './components/Header';
 import { RSVPPageView } from './components/RSVPPageView';
 import { WishesPageView } from './components/WishesPageView';
@@ -18,11 +18,13 @@ export default function App() {
   // Two distinct pages: 'rsvps' (Attendees) and 'wishes' (Wishes)
   const [activePage, setActivePage] = useState<ActivePage>('rsvps');
 
-  const [rsvps, setRsvps] = useState<RSVPItem[]>([]);
-  const [wishes, setWishes] = useState<WishItem[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  // Load from local storage cache immediately so UI loads instantly without cold-start delay
+  const initialCache = useMemo(() => getFromLocalCache(), []);
+  const [rsvps, setRsvps] = useState<RSVPItem[]>(() => initialCache?.rsvps || []);
+  const [wishes, setWishes] = useState<WishItem[]>(() => initialCache?.wishes || []);
+  const [isLoading, setIsLoading] = useState<boolean>(() => !initialCache);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(() => initialCache ? new Date(initialCache.timestamp) : null);
   const [refreshCountdown, setRefreshCountdown] = useState<number>(60);
   const [syncError, setSyncError] = useState<boolean>(false);
 
