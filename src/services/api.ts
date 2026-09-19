@@ -49,83 +49,10 @@ export function parseWishItem(raw: any, index: number): WishItem {
   };
 }
 
-// Fallback seed data in case Google Apps Script network is temporarily slow or offline
+// Empty initial fallback data
 export const FALLBACK_DATA: { rsvps: RSVPItem[]; wishes: WishItem[] } = {
-  rsvps: [
-    {
-      id: 'rsvp-seed-1',
-      timestamp: '2026-09-19T11:25:00.000Z',
-      name: 'Sarah Al-Ahmad (سارة الأحمد)',
-      status: 'حاضر بالتأكيد 🎉',
-      normalizedStatus: 'attending',
-      guestsCount: 3,
-      phone: '+201012345678',
-      message: 'Can not wait to celebrate with beautiful Lina! 🧜‍♀️✨',
-    },
-    {
-      id: 'rsvp-seed-2',
-      timestamp: '2026-09-19T14:27:49.203Z',
-      name: 'خلود وفاطمة',
-      status: 'حاضر بالتأكيد 🎉',
-      normalizedStatus: 'attending',
-      guestsCount: 2,
-      phone: '01003431610',
-      message: 'متحمسين جداً لحفل حورية البحر وعيد ميلاد لينا العاشر! 🐚💖',
-    },
-    {
-      id: 'rsvp-seed-3',
-      timestamp: '2026-09-19T12:10:00.000Z',
-      name: 'مريم وعائلتها',
-      status: 'حاضر بالتأكيد 🎉',
-      normalizedStatus: 'attending',
-      guestsCount: 4,
-      phone: '+966501234567',
-      message: 'ألف مبروك للينا الأميرة الصغيرة، جاهزين للاحتفال في قاع المحيط 👑',
-    },
-    {
-      id: 'rsvp-seed-4',
-      timestamp: '2026-09-19T13:40:00.000Z',
-      name: 'ياسمين كمال',
-      status: 'ربما 🤔',
-      normalizedStatus: 'maybe',
-      guestsCount: 2,
-      phone: '+201198765432',
-      message: 'سنبذل قصارى جهدنا للحضور إن شاء الله حسب مواعيد السفر',
-    },
-    {
-      id: 'rsvp-seed-5',
-      timestamp: '2026-09-19T09:15:00.000Z',
-      name: 'أحمد وزوجته',
-      status: 'معتذر 💌',
-      normalizedStatus: 'declined',
-      guestsCount: 1,
-      phone: '+201234567890',
-      message: 'نعتذر بشدة عن الحضور لظرف طارئ، نتمنى للينا عيد ميلاد سعيد ومميز!',
-    },
-  ],
-  wishes: [
-    {
-      id: 'wish-seed-1',
-      timestamp: '2026-09-19T11:24:00.000Z',
-      author: 'Lina Fan (نور الهدى)',
-      message: 'Wishing you a magical celebration under the sea! 🧜‍♀️✨ May all your ocean dreams come true!',
-      avatar: '🧜‍♀️',
-    },
-    {
-      id: 'wish-seed-2',
-      timestamp: '2026-09-19T14:28:51.809Z',
-      author: 'خلود',
-      message: 'كل سنة وأنتِ طيبة يا أجمل لينا في العالم، وعقبال 100 سنة سعادة وفرح 🎂💖',
-      avatar: '👑',
-    },
-    {
-      id: 'wish-seed-3',
-      timestamp: '2026-09-19T13:00:00.000Z',
-      author: 'ريان وتالا',
-      message: 'عيد ميلاد عاشر سعيد لأحلى حورية بحر! نتمنى لكِ سنة مليئة بالمغامرات والمرح 🐚🌊',
-      avatar: '🐚',
-    },
-  ],
+  rsvps: [],
+  wishes: [],
 };
 
 export async function fetchLiveSheetData(): Promise<{ rsvps: RSVPItem[]; wishes: WishItem[] }> {

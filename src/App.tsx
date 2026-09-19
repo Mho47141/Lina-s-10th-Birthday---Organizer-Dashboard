@@ -6,7 +6,7 @@ import {
   Language, 
   ActivePage 
 } from './types';
-import { fetchLiveSheetData, FALLBACK_DATA } from './services/api';
+import { fetchLiveSheetData } from './services/api';
 import { Header } from './components/Header';
 import { RSVPPageView } from './components/RSVPPageView';
 import { WishesPageView } from './components/WishesPageView';
@@ -39,20 +39,13 @@ export default function App() {
     }
     try {
       const data = await fetchLiveSheetData();
-      if (data.rsvps.length > 0 || data.wishes.length > 0) {
-        setRsvps(data.rsvps);
-        setWishes(data.wishes);
-      } else {
-        setRsvps(FALLBACK_DATA.rsvps);
-        setWishes(FALLBACK_DATA.wishes);
-      }
+      // Strictly reflect the exact live data from Google Sheet (empty if rows were deleted)
+      setRsvps(data.rsvps || []);
+      setWishes(data.wishes || []);
       setLastUpdated(new Date());
       setSyncError(false);
     } catch (err) {
-      console.warn('Live fetch issue; using fallback/cached data:', err);
-      setRsvps(prev => (prev.length > 0 ? prev : FALLBACK_DATA.rsvps));
-      setWishes(prev => (prev.length > 0 ? prev : FALLBACK_DATA.wishes));
-      setLastUpdated(new Date());
+      console.warn('Live fetch issue:', err);
       setSyncError(true);
     } finally {
       setIsLoading(false);
@@ -143,7 +136,7 @@ export default function App() {
         />
 
         {/* Loading Spinner for initial fetch */}
-        {isLoading && rsvps.length === 0 ? (
+        {isLoading ? (
           <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
             <div className="relative w-16 h-16 mb-4">
               <div className="absolute inset-0 rounded-full border-3 border-cyan-500/20 border-t-cyan-400 animate-spin" />

@@ -282,8 +282,12 @@ export const RSVPPageView: React.FC<RSVPPageViewProps> = ({
         {/* Empty State */}
         {filteredRSVPs.length === 0 ? (
           <div className="glass-panel rounded-2xl p-8 text-center text-cyan-300/70">
-            <div className="text-2xl mb-2">🐚</div>
-            <p className="text-xs font-semibold text-cyan-100">{t.rsvps.noResults}</p>
+            <div className="text-3xl mb-2">🐚</div>
+            <p className="text-xs font-semibold text-cyan-100">
+              {rsvps.length === 0
+                ? (lang === 'ar' ? 'لا توجد بيانات حضور مسجلة حالياً (Google Sheet فارغ)' : 'No attendee records found in Google Sheet (Sheet is empty)')
+                : t.rsvps.noResults}
+            </p>
           </div>
         ) : (
           /* Cards List - Perfectly sized for mobile with ZERO horizontal scroll */

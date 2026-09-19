@@ -144,8 +144,12 @@ export const WishesPageView: React.FC<WishesPageViewProps> = ({
         {/* Empty State */}
         {filteredWishes.length === 0 ? (
           <div className="glass-panel rounded-2xl p-8 text-center text-pink-300/70">
-            <div className="text-2xl mb-2">🧜‍♀️</div>
-            <p className="text-xs font-semibold text-pink-100">{t.wishes.noWishes}</p>
+            <div className="text-3xl mb-2">🧜‍♀️</div>
+            <p className="text-xs font-semibold text-pink-100">
+              {wishes.length === 0
+                ? (lang === 'ar' ? 'لا توجد أمنيات مسجلة حالياً (Google Sheet فارغ)' : 'No wishes submitted yet in Google Sheet (Sheet is empty)')
+                : t.wishes.noWishes}
+            </p>
           </div>
         ) : (
           /* Cards List - Zero Horizontal Scroll */
