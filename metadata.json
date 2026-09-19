@@ -1,0 +1,6 @@
+{
+  "name": "Lina's 10th Birthday - Organizer Dashboard",
+  "description": "لوحة تحكم وإدارة مخصصة لمنظمي حفل عيد ميلاد لينا العاشر لمتابعة الحضور (RSVP) ودفتر الأمنيات مباشرة من Google Sheet بتصميم حورية البحر وأعماق المحيط الساحر.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
